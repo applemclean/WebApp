@@ -1,0 +1,9 @@
+DatabaseService/bin
+DatabaseService/obj
+DatabaseService.Tests/bin
+DatabaseService.Tests/obj
+WebApp/bin
+WebApp/obj
+WebApp.Tests/bin
+WebApp.Tests/obj
+packages/
