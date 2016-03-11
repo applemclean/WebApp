@@ -6,4 +6,8 @@ WebApp/bin
 WebApp/obj
 WebApp.Tests/bin
 WebApp.Tests/obj
-packages/
+TestResults
+Helpers/bin
+Helpers/obj
+DatabaseService.WindowsService/bin
+DatabaseService.WindowsService/obj

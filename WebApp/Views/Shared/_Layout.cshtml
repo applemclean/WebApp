@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html ng-app="usersManager">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    @using WebApp.Presenters
+    @model CSRFPresenter
+
+    <form class="hidden" id="csrfHost">
+        <input type="hidden" name="@Model.TokenName" value=@Model.Code>
+    </form>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="/" class="navbar-brand">
+                Users management
+            </a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

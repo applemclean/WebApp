@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Users manager";
+}
+
+<div ng-controller="usersController">
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <form name="form" novalidate ng-submit="form.$valid && save(user)">
+                <div class="form-group">
+                    <h2>User</h2>
+                </div>
+                <input type="hidden" name="Id" ng-model="user.Id">
+                <div class="form-group">
+                    <label for="formEmail">Email:</label>
+                    <input type="text" class="form-control" name="EMail" placeholder="mail@example.com" ng-model=user.EMail simple-email required>
+                    <div ng-show="form.EMail.$error.required" ng-cloak class="text-danger">&mdash; An EMail is required</div>
+                    <div ng-show="form.EMail.$error.simpleEmail" ng-cloak class="text-danger">&mdash; Wrong EMail</div>
+                </div>
+                <div class="form-group">
+                    <label for="formName">Name:</label>
+                    <input type="text" class="form-control" name="Name" placeholder="User name" ng-model=user.Name required>
+                    <div ng-show="form.Name.$error.required" ng-cloak class="text-danger">&mdash; Please specify a name</div>
+                </div>
+                <div class="form-group">
+                    <label for="formSurname">Surname:</label>
+                    <input type="text" class="form-control" name="Surname" placeholder="Surname" ng-model=user.Surname required>
+                    <div ng-show="form.Surname.$error.required" ng-cloak class="text-danger">&mdash; Please specify a surname</div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="form-control btn btn-primary" value="Save" ng-disabled="form.$invalid">
+                    <hr />
+                    <input type="button" class="form-control btn btn-default" value="Clear" ng-click="clear()">
+                </div>
+            </form>
+        </div>
+
+        <div class="col-xs-12 col-md-9">
+            <h2>Existing users</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">Id</th>
+                        <th class="col-md-1">EMail</th>
+                        <th class="col-md-1">Name</th>
+                        <th class="col-md-1">Surname</th>
+                        <th class="col-md-4"></th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="i in usersOnPage">
+                    <td ng-cloak>{{ i.Id }}</td>
+                    <td ng-cloak>{{ i.EMail }}</td>
+                    <td ng-cloak>{{ i.Name }}</td>
+                    <td ng-cloak>{{ i.Surname }}</td>
+                    <td ng-cloak>
+                        <a href="javascript:void(0)" class="btn btn-default" ng-click="edit(i)">Edit</a> 
+                        <a href="javascript:void(0)" class="btn btn-danger" ng-click="delete(i)">Delete</a>
+                    </td>
+                </tr>
+            </table>
+            
+            <nav ng-if="pagesTotal != 0">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous" ng-click="getUsers(currentPage - 1)" ng-show="pageAvailable(currentPage - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" ng-repeat="i in pages">
+                        <a href="javascript:void(0)" ng-cloak ng-click="getUsers(i.Page)">
+                            {{ i.Number }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label="Next" ng-click="getUsers(currentPage + 1)" ng-show="pageAvailable(currentPage + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
